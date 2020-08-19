@@ -1,0 +1,420 @@
+﻿<Window x:Class="ProjektZaliczeniowyMVVMNet.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjektZaliczeniowyMVVMNet" 
+        xmlns:mw="clr-namespace:ProjektZaliczeniowyMVVMNet.ModelWidoku"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="Budget Planner" Height="1000" Width="1400"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <mw:WydatkiMW />
+    </Window.DataContext>
+    <Window.Background>
+        <LinearGradientBrush>
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Offset="0.0" Color="#b3b3b3"/>
+                <GradientStop Offset="0.5" Color="#999999"/>
+                <GradientStop Offset="1.0" Color="#737373"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.Resources>
+        <local:Wydatekconverter x:Key="dodajWydatek" />
+        <!-- styl do comboox -->
+<!--
+        <Style x:Key="comboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border CornerRadius="7" BorderThickness="1" Background="#ffe0b3" BorderBrush="#ff9900"></Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+-->
+        <!-- styl do inputów -->
+        <!--
+        <Style x:Key="inputFieldStyle" TargetType="TextBox">
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="#ffe0b3" CornerRadius="9" BorderThickness="2" BorderBrush="#ff9900"></Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        -->
+        <!-- style setter dla usuń-->
+        <Style x:Key="stylUsuńWydatek" TargetType="Button">
+            <Setter Property="Foreground" Value="Yellow"/>
+            <!-- https://stackoverflow.com/questions/6745663/how-to-create-make-rounded-corner-buttons-in-wpf -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border" CornerRadius="8" BorderThickness="2" BorderBrush="#ffe6f9">
+                                <Border.Background>
+                                    <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                        <RadialGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                <TranslateTransform X="0.02" Y="0.03"/>
+                                            </TransformGroup>
+                                        </RadialGradientBrush.RelativeTransform>
+                                        <GradientStop Offset="1" Color="#ff3333"/>
+                                        <GradientStop Offset="0.3" Color="#ff1a1a"/>
+                                    </RadialGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"  TextElement.FontWeight="Bold"
+                                                  TextElement.FontSize="15"></ContentPresenter>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#ccffcc" Offset="1"/>
+                                            <GradientStop Color="#b3ffb3" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="Black"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#ccffdd" Offset="1"/>
+                                            <GradientStop Color="#99ffbb" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="Gray"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- style setter dla dodaj -->
+        <Style x:Key="stylDodajWydatek" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border" CornerRadius="8" BorderThickness="2" BorderBrush="#39e600">
+                                <Border.Background>
+                                    <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                        <RadialGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                <TranslateTransform X="0.02" Y="0.03"/>
+                                            </TransformGroup>
+                                        </RadialGradientBrush.RelativeTransform>
+                                        <GradientStop Offset="0.0" Color="#2db300"/>
+                                        <GradientStop Offset="1.0" Color="#269900"/>
+                                    </RadialGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"  TextElement.FontWeight="Bold"
+                                                  TextElement.FontSize="15"></ContentPresenter>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                            <RadialGradientBrush.RelativeTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                    <TranslateTransform X="0.02" Y="0.3"/>
+                                                </TransformGroup>
+                                            </RadialGradientBrush.RelativeTransform>
+                                            <GradientStop Color="#00000000" Offset="1"/>
+                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding Zapisz}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <StackPanel>
+        <Border Margin="5" Padding="5" BorderThickness="4" BorderBrush="#ff8080" Background="AntiqueWhite" CornerRadius="10">
+            <TextBlock Name="tbNazwaAplikacji" Text="Budget Planner" FontSize="45" FontWeight="Bold"
+                  HorizontalAlignment="Center" Padding="10,10,10,10" Foreground="#ff8080" Height="70" />
+        </Border>
+
+        <TextBlock Name="tbPrzeznaczenieApliakcji" 
+                   Text="Uzupełnij swoje miesięczne wydatki. Kliknij przycisk 'Wygeneruj raport' żeby zobaczyć graficzne rozłożenie Twoich wydatków" 
+                   FontSize="28" FontStyle="Italic" TextWrapping="Wrap" Margin="15,15,15,15" HorizontalAlignment="Center"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230"></ColumnDefinition>
+                <ColumnDefinition Width="500"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Column="0" Header="Nowy wydatek" Margin="10,10,10,10" Width="200" Height="290" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <WrapPanel Orientation="Vertical">
+                    <Label Content="Całkowita pensja:"/>
+                    <TextBox Background="Transparent" Name="tbPensja" Height="25" Width="150"/>
+                    <Label Content="Na co wydano:"/>
+                    <TextBox Background="Transparent" Name="tbNaCoWydano" Height="25" Width="150"/>
+                    <Label Content="Ile wydano" Height="25" Width="150"/>
+                    <TextBox Background="Transparent" Name="tbIleWydano" Height="25" Width="150"/>
+                    <Label Content="Kategoria:"/>
+                    <ComboBox Name="cbKtegoria" Width="150" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <ComboBoxItem>Żywność</ComboBoxItem>
+                        <ComboBoxItem >Prąd</ComboBoxItem>
+                        <ComboBoxItem>Woda</ComboBoxItem>
+                        <ComboBoxItem>Sport</ComboBoxItem>
+                        <ComboBoxItem>Rozrywka</ComboBoxItem>
+                        <ComboBoxItem>Ubranie</ComboBoxItem>
+                        <ComboBoxItem>Multimedia</ComboBoxItem>
+                        <ComboBoxItem>Domowe zwierzaki</ComboBoxItem>
+                        <ComboBoxItem>Środki higieniczne</ComboBoxItem>
+                        <ComboBoxItem>Kosmetyki</ComboBoxItem>
+                        <ComboBoxItem>Nieprzewidziane wydatki</ComboBoxItem>
+                        <ComboBoxItem>Kredyty</ComboBoxItem>
+                        <ComboBoxItem>Wakacje</ComboBoxItem>
+                        <ComboBoxItem>Oszczędności</ComboBoxItem>
+                        <ComboBoxItem>Paliwo</ComboBoxItem>
+                        <ComboBoxItem>Inne</ComboBoxItem>
+                    </ComboBox>
+                    <Button Name="btnDodajWydatek" Content="Dodaj" Width="80" Height="35"
+                Margin="10,10,10,10" Command="{Binding DodajWydatek}"
+                            Style="{DynamicResource stylDodajWydatek}" IsEnabled="True" Background="Transparent" >
+
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource dodajWydatek}">
+                                <Binding ElementName="tbNaCoWydano" Path="Text"/>
+                                <Binding ElementName="tbIleWydano" Path="Text"/>
+                                <Binding ElementName="cbKtegoria" Path="SelectedIndex"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+
+                    </Button>
+                </WrapPanel>
+            </GroupBox>
+            <ListBox ItemsSource="{Binding Path=ListaWydatków}" Grid.Column="1" Name="lbListaWydatków" Margin="10,10,10,10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <TextBlock Name="tbWydatek" FontSize="15" Text="Wydatek">
+                            Nazwa: <Run Text="{Binding Path=NaCoWydano, Mode=OneWay}"/>
+                            Ile wydano: <Run Text="{Binding Path=IleWydano, Mode=OneWay}"/>
+                            Kategoria: <Run Text="{Binding Path=KategoriaWydatku, Mode=OneWay}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Content="Usuń" Width="80" Height="40" Grid.Column="1" VerticalAlignment="Bottom" Command="{Binding UsuńWydatek}"
+                    CommandParameter="{Binding ElementName=lbListaWydatków,Path=SelectedIndex}" Style="{DynamicResource stylUsuńWydatek}"
+                FontSize="15" Foreground="White" Margin="15,15,15,15"/>
+            <TextBlock Text="Zestawienie miesizne wydatów" Grid.Column="2" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"
+                       Foreground="White" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal" Height="250" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Bottom">
+                <Rectangle x:Name="żywność" Width="30" Height="40" Fill="#e6ffee" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="prąd" Width="30" Height="40" Fill="#b3ffcc" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="woda" Width="30" Height="40" Fill="#80ffaa" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="sport" Width="30" Height="40" Fill="#4dff88" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="rozrywka" Width="30" Height="40" Fill="#1aff66" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="ubrania" Width="30" Height="40" Fill="#00e64d" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="multimedia" Width="30" Height="40" Fill="#00b33c" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="domoweZwierzaki" Width="30" Height="40" Fill="#00802b" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="środkihigieniczne" Width="30" Height="40" Fill="#004d1a" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="kosmetyki" Width="30" Height="40" Fill="#003300" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="nieprzewidzianeWydayki" Width="30" Height="40" Fill="#26734d" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="kredyty" Width="30" Height="40" Fill="#339966" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="wakajce" Width="30" Height="40" Fill="#40bf80" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="oszczędności" Width="30" Height="40" Fill="#66cc99" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="paliwo" Width="30" Height="40" Fill="#8cd9b3" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="inne" Width="30" Height="40" Fill="#1affb2" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+            </StackPanel>
+        </Grid>
+        
+            <Button Name="btWygenerujRaport" Content="Wygeneruj raport" Width="250" Height="45" FontSize="25" Margin="5,5,5,5"
+                    Foreground="AntiqueWhite" Background="#ff8080"/>
+
+
+        <Grid Width="1300" Height="350" Background="#f2f2f2">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="#e6ffee" CornerRadius="5" BorderThickness="3" Grid.Row="0" Grid.Column="0">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbŻywność" Background="#e6ffee">
+                    <TextBlock Text="Żywność" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="{Binding ElementName=ComboBoxItem, Path=SelectedValue}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="{Binding ElementName=żywnośćProcent, Path=Text}"/>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#b3ffcc" CornerRadius="5" BorderThickness="3" Grid.Row="0" Grid.Column="1">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbPrąd" Background="#b3ffcc">
+                    <TextBlock Text="Prąd" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#80ffaa" CornerRadius="5" BorderThickness="3" Grid.Row="0" Grid.Column="2">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbWoda" Background="#80ffaa">
+                    <TextBlock Text="Woda" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#4dff88" CornerRadius="5" BorderThickness="3" Grid.Row="0" Grid.Column="3">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbSport" Background="#4dff88">
+                    <TextBlock Text="Sport" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#1aff66" CornerRadius="5" BorderThickness="3" Grid.Row="1" Grid.Column="0">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbRozrywka" Background="#1aff66">
+                    <TextBlock Text="Rozrywka" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#00e64d" CornerRadius="5" BorderThickness="3" Grid.Row="1" Grid.Column="1">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbUbranie" Background="#00e64d">
+                    <TextBlock Text="Ubranie" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#00b33c" CornerRadius="5" BorderThickness="3" Grid.Row="1" Grid.Column="2">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbMultimedia" Background="#00b33c">
+                    <TextBlock Text="Multimedia" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#00802b" CornerRadius="5" BorderThickness="3" Grid.Row="1" Grid.Column="3">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbDomoweZwierzaki" Background="#00802b">
+                    <TextBlock Text="Domowe zwierzaki" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#004d1a" CornerRadius="5" BorderThickness="3" Grid.Row="2" Grid.Column="0">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbsrodkihigieniczne" Background="#004d1a">
+                    <TextBlock Foreground="White" Text="Środki higieniczne" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Foreground="White" Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#003300" CornerRadius="5" BorderThickness="3" Grid.Row="2" Grid.Column="1">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbKosmetyki" Background="#003300">
+                    <TextBlock Foreground="White" Text="Kosmetyki" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Foreground="White" Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#26734d" CornerRadius="5" BorderThickness="3" Grid.Row="2" Grid.Column="2">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbNieprzewidzianeWydatki" Background="#26734d">
+                    <TextBlock Foreground="White" Text="Nieprzewidziane wydatki" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Foreground="White" Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#339966" CornerRadius="5" BorderThickness="3" Grid.Row="2" Grid.Column="3">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbKredyty" Background="#339966">
+                    <TextBlock Text="Kredyty" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#40bf80" CornerRadius="5" BorderThickness="3" Grid.Row="3" Grid.Column="0">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbWakacje" Background="#40bf80">
+                    <TextBlock Text="Wakacje" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#66cc99" CornerRadius="5" BorderThickness="3" Grid.Row="3" Grid.Column="1">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbOszczędności" Background="#66cc99">
+                    <TextBlock Text="Oszczędności" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#8cd9b3" CornerRadius="5" BorderThickness="3" Grid.Row="3" Grid.Column="2">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbPaliwo" Background="#8cd9b3">
+                    <TextBlock Text="Paliwo" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="#1affb2" CornerRadius="5" BorderThickness="3" Grid.Row="3" Grid.Column="3">
+                <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Width="325" Height="90" Name="tbInne" Background="#1affb2">
+                    <TextBlock Text="Inne" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                </StackPanel>
+            </Border>
+        </Grid>
+        
+    </StackPanel>
+</Window>
