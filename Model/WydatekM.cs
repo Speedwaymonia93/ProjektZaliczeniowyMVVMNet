@@ -22,6 +22,7 @@ namespace ProjektZaliczeniowyMVVMNet.Model
             this.NaCoWdano = naCoWydano;
             this.IleWydano = ileWydano;
             this.KategoriaWydatku = kategoriaWydatku;
+
         }
 
         public override string ToString()
@@ -121,5 +122,6 @@ namespace ProjektZaliczeniowyMVVMNet.Model
             double inneProcenty = (inneCount / 16) * 100;
         }
 
+       
         }
 }
