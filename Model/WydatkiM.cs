@@ -15,21 +15,24 @@ namespace ProjektZaliczeniowyMVVMNet.Model
     {
         // prywatna lista wydatków i zainicjowanie jej
         private List<WydatekM> listaWydatków = new List<WydatekM>();
-        
+
         // operacje CRUD
         // dodawanie wydatek
         public void DodajWydatek(WydatekM wydatek)
         {
-          listaWydatków.Add(wydatek);
-          policzKategorie(wydatek);
+            listaWydatków.Add(wydatek);
+            policzKategorie(wydatek);
+
         }
 
+        public DaneM dane = new DaneM();
+       
         // policzenie kategoruu
         public void policzKategorie(WydatekM wydatek)
         {//  Żywnośc, Prąd, Woda, Sport, Rozrywka, Ubranie, DomoweZwierzaki, Multimedia, ŚrodkiHigieniczne,
          //   Kosmetyki, NieprzewidzianeWydatki, Kredyty, Wakacje,Paliwo, Oszczędności, Inne
             var kategoria = (int)wydatek.KategoriaWydatku;
-            int żywnośćiCount = 0;
+            int żywnośćCount = 0;
             int prądCount = 0;
             int wodaCount = 0;
             int sportCount = 0;
@@ -45,10 +48,10 @@ namespace ProjektZaliczeniowyMVVMNet.Model
             int paliwoCount = 0;
             int oszczednosciCount = 0;
             int inneCount = 0;
-            switch(kategoria)
+            switch (kategoria)
             {
                 case 0:
-                    żywnośćiCount += 1;
+                    żywnośćCount += 1;
                     break;
                 case 1:
                     prądCount += 1;
@@ -96,28 +99,29 @@ namespace ProjektZaliczeniowyMVVMNet.Model
                     inneCount += 1;
                     break;
             }
+            //DaneM dane = new DaneM();
 
-            double zywnośćProcenty = (żywnośćiCount / 16) * 100;
-            double prądProcenty = (prądCount / 16) * 100;
-            double wodaProcenty = (wodaCount / 16) * 100;
-            double sportProcenty = (sportCount / 16) * 100;
+            dane.zywnośćProcenty = (żywnośćCount / 16.0) * 100;
+           dane.prądProcenty = (prądCount / 16.0) * 100;
+            dane.wodaProcenty = (wodaCount / 16.0) * 100;
+            dane.sportProcenty = (sportCount / 16.0) * 100;
 
-            double rozrywkaProcenty = (rozrywkaCount / 16) * 100;
-            double ubranieProcenty = (ubranieCount / 16) * 100;
-            double domoweZwProcenty = (domoweZwierzakicount / 16) * 100;
-            double multimediaProcenty = (multimediaCount / 16) * 100;
+            dane.rozrywkaProcenty = (rozrywkaCount / 16.0) * 100;
+            dane.ubranieProcenty = (ubranieCount / 16.0) * 100;
+            dane.domoweZwProcenty = (domoweZwierzakicount / 16.0) * 100;
+            dane.multimediaProcenty = (multimediaCount / 16.0) * 100;
 
-            double środkihigProcenty = (środkihigieniczneCount / 16) * 100;
-            double kosmetykiProcenty = (kosmetykucount / 16) * 100;
-            double nieprzewidizaneProcenty = (nieprzewiduzaneWydatkiCount / 16) * 100;
-            double kredytyProcenty = (kredytycount / 16) * 100;
+            dane.środkihigProcenty = (środkihigieniczneCount / 16.0) * 100;
+            dane.kosmetykiProcenty = (kosmetykucount / 16.0) * 100;
+            dane.nieprzewidizaneProcenty = (nieprzewiduzaneWydatkiCount / 16.0) * 100;
+            dane.kredytyProcenty = (kredytycount / 16.0) * 100;
 
-            double wakacjePocenty = (wakacjeCount / 16) * 100;
-            double pliwoProcenty = (paliwoCount / 16) * 100;
-            double oszczednościProcenty = (oszczednosciCount / 16) * 100;
-            double inneProcenty = (inneCount / 16) * 100;
+            dane.wakacjePocenty = (wakacjeCount / 16.0) * 100;
+            dane.pliwoProcenty = (paliwoCount / 16.0) * 100;
+            dane.oszczednościProcenty = (oszczednosciCount / 16.0) * 100;
+            dane.inneProcenty = (inneCount / 16.0) * 100;
 
-
+            
             // lista wartośic procentowych która bezie wykorzystana do pzypisania poszeczególnych
             // elementów tej listy do wysokości słupka
 
@@ -138,7 +142,7 @@ namespace ProjektZaliczeniowyMVVMNet.Model
            // }
            */
         }
-        
+
         // usuń wydatek
         public bool UsuńWydatek(WydatekM wydatek)
         {

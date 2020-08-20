@@ -77,6 +77,7 @@
     <Compile Include="ModelWidoku\RelayCommand.cs" />
     <Compile Include="ModelWidoku\WydatekMW.cs" />
     <Compile Include="ModelWidoku\WydatkiMW.cs" />
+    <Compile Include="Model\Dane.cs" />
     <Compile Include="Model\PlikXml.cs" />
     <Compile Include="Model\WydatekM.cs" />
     <Compile Include="Model\WydatkiM.cs" />

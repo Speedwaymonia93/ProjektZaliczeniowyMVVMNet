@@ -248,7 +248,7 @@
             <TextBlock Text="Zestawienie miesizne wydatów" Grid.Column="2" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center"
                        Foreground="White" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal" Height="250" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Bottom">
-                <Rectangle x:Name="żywność" Width="30" Height="40" Fill="#e6ffee" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="żywność" Width="30" Height="{Binding żywnośćProcent}" Fill="#e6ffee" Margin="5" VerticalAlignment="Bottom"></Rectangle>
                 <Rectangle x:Name="prąd" Width="30" Height="40" Fill="#b3ffcc" Margin="5" VerticalAlignment="Bottom"></Rectangle>
                 <Rectangle x:Name="woda" Width="30" Height="40" Fill="#80ffaa" Margin="5" VerticalAlignment="Bottom"></Rectangle>
                 <Rectangle x:Name="sport" Width="30" Height="40" Fill="#4dff88" Margin="5" VerticalAlignment="Bottom"></Rectangle>
@@ -289,8 +289,8 @@
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbŻywność" Background="#e6ffee">
                     <TextBlock Text="Żywność" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="{Binding ElementName=ComboBoxItem, Path=SelectedValue}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="{Binding ElementName=żywnośćProcent, Path=Text}"/>
+
+                    <TextBlock Text="{Binding Path=żywnośćProcent}" Height="30" Margin="10" />
                     <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
                 </StackPanel>
             </Border>

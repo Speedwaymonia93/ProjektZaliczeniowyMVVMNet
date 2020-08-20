@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjektZaliczeniowyMVVMNet.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -33,30 +34,9 @@ namespace ProjektZaliczeniowyMVVMNet.ModelWidoku
             }
         }
 
-        // własności doble do przechowywania procenta dla poszczególnych kategorii
-        public double żywnośćProcent
-        { 
-            get 
-            {
-                return model.zywnośćProcenty;
-
-            }
-        } 
-        public double prądProcent => model.policzKategorie.prądProcenty;
-        public double wodaProcent => model.policzKategorie.wodaProcenty;
-        public double sportProcent => model.policzKategorie.sportProcenty;
-        public double rozrywkaProcent => model.policzKategorie.rozrywkaProcenty;
-        public double ubranieProcent => model.policzKategorie.ubranieProcenty;
-        public double domoweZwierzakiProcent => model.policzKategorie.domoweZwProcenty;
-        public double multimediaProcent => model.policzKategorie.multimediaProcenty;
-        public double środkihigieniczneProcent => model.policzKategorie.środkihigProcenty;
-        public double kosmetykiProcent => model.policzKategorie.kosmetykiProcenty;
-        public double nieprzewidzianeWydatkiProcent => model.policzKategorie.nieprzewidizaneProcenty;
-        public double kredytyProcent => model.policzKategorie.kredytyProcenty;
-        public double wakacjeProcent => model.policzKategorie.wakacjePocenty;
-        public double paliwoProcent => model.policzKategorie.pliwoProcenty;
-        public double oszczędnościProcent => model.policzKategorie.oszczednościProcenty;
-        public double inneProcent => model.policzKategorie.inneProcenty;
+        
+       
+  
 
 
         #endregion

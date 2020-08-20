@@ -9,7 +9,7 @@ using System.Windows.Input;
 namespace ProjektZaliczeniowyMVVMNet.ModelWidoku
 {
     using static Model.PlikXml;
-    public class WydatkiMW
+    public class WydatkiMW : ObservedObject
     {
         // przechowanie prywatnej instancji modelu
         private Model.WydatkiM model;
@@ -109,6 +109,8 @@ namespace ProjektZaliczeniowyMVVMNet.ModelWidoku
                      {
                          WydatekMW wydatek = o as WydatekMW;
                          if (wydatek != null) ListaWydatków.Add(wydatek);
+                         // po przecinku wszystkie własności
+                         onPropertyChanged(nameof(żywnośćProcent));
                      },
                      o =>
                      {
@@ -118,6 +120,29 @@ namespace ProjektZaliczeniowyMVVMNet.ModelWidoku
             }
         }
 
+        public double żywnośćProcent
+        {
+            get
+            {
+                return model.dane.zywnośćProcenty;
+
+            }
+        }
+        public double prądProcent => model.dane.prądProcenty;
+        public double wodaProcent => model.dane.wodaProcenty;
+        public double sportProcent => model.dane.sportProcenty;
+        public double rozrywkaProcent => model.dane.rozrywkaProcenty;
+        public double ubranieProcent => model.dane.ubranieProcenty;
+        public double domoweZwierzakiProcent => model.dane.domoweZwProcenty;
+        public double multimediaProcent => model.dane.multimediaProcenty;
+        public double środkihigieniczneProcent => model.dane.środkihigProcenty;
+        public double kosmetykiProcent => model.dane.kosmetykiProcenty;
+        public double nieprzewidzianeWydatkiProcent => model.dane.nieprzewidizaneProcenty;
+        public double kredytyProcent =>  model.dane.kredytyProcenty;
+        public double wakacjeProcent => model.dane.wakacjePocenty;
+        public double paliwoProcent => model.dane.pliwoProcenty;
+        public double oszczędnościProcent => model.dane.oszczednościProcenty;
+        public double inneProcent => model.dane.inneProcenty;
 
     }
 }
