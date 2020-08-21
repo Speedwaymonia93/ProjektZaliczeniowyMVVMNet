@@ -21,8 +21,8 @@ namespace ProjektZaliczeniowyMVVMNet.Model
         public void DodajWydatek(WydatekM wydatek)
         {
             listaWydatków.Add(wydatek);
-            policzKategorie(wydatek);
-
+           policzKategorie(wydatek);
+            
         }
 
         public DaneM dane = new DaneM();
@@ -48,57 +48,61 @@ namespace ProjektZaliczeniowyMVVMNet.Model
             int paliwoCount = 0;
             int oszczednosciCount = 0;
             int inneCount = 0;
-            switch (kategoria)
-            {
-                case 0:
-                    żywnośćCount += 1;
-                    break;
-                case 1:
-                    prądCount += 1;
-                    break;
-                case 2:
-                    wodaCount += 1;
-                    break;
-                case 3:
-                    sportCount += 1;
-                    break;
-                case 4:
-                    rozrywkaCount += 1;
-                    break;
-                case 5:
-                    ubranieCount += 1;
-                    break;
-                case 6:
-                    domoweZwierzakicount += 1;
-                    break;
-                case 7:
-                    multimediaCount += 1;
-                    break;
-                case 8:
-                    środkihigieniczneCount += 1;
-                    break;
-                case 9:
-                    kosmetykucount += 1;
-                    break;
-                case 10:
-                    nieprzewiduzaneWydatkiCount += 1;
-                    break;
-                case 11:
-                    kredytycount += 1;
-                    break;
-                case 12:
-                    wakacjeCount += 1;
-                    break;
-                case 13:
-                    paliwoCount += 1;
-                    break;
-                case 14:
-                    oszczednosciCount += 1;
-                    break;
-                case 15:
-                    inneCount += 1;
-                    break;
-            }
+
+            
+                switch (kategoria)
+                {
+                    case 0:
+                        żywnośćCount += 1;
+                        break;
+                    case 1:
+                        prądCount += 1;
+                        break;
+                    case 2:
+                        wodaCount += 1;
+                        break;
+                    case 3:
+                        sportCount += 1;
+                        break;
+                    case 4:
+                        rozrywkaCount += 1;
+                        break;
+                    case 5:
+                        ubranieCount += 1;
+                        break;
+                    case 6:
+                        domoweZwierzakicount += 1;
+                        break;
+                    case 7:
+                        multimediaCount += 1;
+                        break;
+                    case 8:
+                        środkihigieniczneCount += 1;
+                        break;
+                    case 9:
+                        kosmetykucount += 1;
+                        break;
+                    case 10:
+                        nieprzewiduzaneWydatkiCount += 1;
+                        break;
+                    case 11:
+                        kredytycount += 1;
+                        break;
+                    case 12:
+                        wakacjeCount += 1;
+                        break;
+                    case 13:
+                        paliwoCount += 1;
+                        break;
+                    case 14:
+                        oszczednosciCount += 1;
+                        break;
+                    case 15:
+                        inneCount += 1;
+                        break;
+                }
+            
+           
             //DaneM dane = new DaneM();
 
             dane.zywnośćProcenty = (żywnośćCount / 16.0) * 100;
@@ -122,25 +126,6 @@ namespace ProjektZaliczeniowyMVVMNet.Model
             dane.inneProcenty = (inneCount / 16.0) * 100;
 
             
-            // lista wartośic procentowych która bezie wykorzystana do pzypisania poszeczególnych
-            // elementów tej listy do wysokości słupka
-
-            /*
-        List<float?> listaProcentów = new List<float?>();
-        var pogrupowaneKategorie =
-        from kategoria in listaWydatków
-        group kategoria by kategoria.KategoriaWydatku into kategoriaGropu
-            select new
-        {
-            Kateoria = kategoriaGropu.Key,
-            Count = kategoriaGropu.Count(),
-        };
-            var k = pogrupowaneKategorie.ToArray();
-           //for(int i = 0; i < k.Length; i++)
-           // {
-           //     listaProcentów.Add(k[i]/16);
-           // }
-           */
         }
 
         // usuń wydatek

@@ -249,21 +249,21 @@
                        Foreground="White" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal" Height="250" HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Bottom">
                 <Rectangle x:Name="żywność" Width="30" Height="{Binding żywnośćProcent}" Fill="#e6ffee" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="prąd" Width="30" Height="40" Fill="#b3ffcc" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="woda" Width="30" Height="40" Fill="#80ffaa" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="sport" Width="30" Height="40" Fill="#4dff88" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="rozrywka" Width="30" Height="40" Fill="#1aff66" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="ubrania" Width="30" Height="40" Fill="#00e64d" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="multimedia" Width="30" Height="40" Fill="#00b33c" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="domoweZwierzaki" Width="30" Height="40" Fill="#00802b" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="środkihigieniczne" Width="30" Height="40" Fill="#004d1a" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="kosmetyki" Width="30" Height="40" Fill="#003300" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="nieprzewidzianeWydayki" Width="30" Height="40" Fill="#26734d" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="kredyty" Width="30" Height="40" Fill="#339966" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="wakajce" Width="30" Height="40" Fill="#40bf80" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="oszczędności" Width="30" Height="40" Fill="#66cc99" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="paliwo" Width="30" Height="40" Fill="#8cd9b3" Margin="5" VerticalAlignment="Bottom"></Rectangle>
-                <Rectangle x:Name="inne" Width="30" Height="40" Fill="#1affb2" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="prąd" Width="30" Height="{Binding prądProcent}" Fill="#b3ffcc" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="woda" Width="30" Height="{Binding wodaProcent}" Fill="#80ffaa" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="sport" Width="30" Height="{Binding sportProcent}" Fill="#4dff88" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="rozrywka" Width="30" Height="{Binding rozrywkaProcent}" Fill="#1aff66" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="ubrania" Width="30" Height="{Binding ubranieProcent}" Fill="#00e64d" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="multimedia" Width="30" Height="{Binding multimediaProcent}" Fill="#00b33c" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="domoweZwierzaki" Width="30" Height="{Binding domoweZwierzakiProcent}" Fill="#00802b" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="środkihigieniczne" Width="30" Height="{Binding środkihigieniczneProcent}" Fill="#004d1a" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="kosmetyki" Width="30" Height="{Binding kosmetykiProcent}" Fill="#003300" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="nieprzewidzianeWydayki" Width="30" Height="{Binding nieprzewidzianeWydatkiProcent}" Fill="#26734d" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="kredyty" Width="30" Height="{Binding kredytyProcent}" Fill="#339966" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="wakajce" Width="30" Height="{Binding wakacjeProcent}" Fill="#40bf80" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="oszczędności" Width="30" Height="{Binding oszczędnościProcent}" Fill="#66cc99" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="paliwo" Width="30" Height="{Binding paliwoProcent}" Fill="#8cd9b3" Margin="5" VerticalAlignment="Bottom"></Rectangle>
+                <Rectangle x:Name="inne" Width="30" Height="{Binding inneProcent}" Fill="#1affb2" Margin="5" VerticalAlignment="Bottom"></Rectangle>
             </StackPanel>
         </Grid>
         
@@ -285,133 +285,132 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border BorderBrush="#e6ffee" CornerRadius="5" BorderThickness="3" Grid.Row="0" Grid.Column="0">
+            <Border BorderBrush="#b3ffcc" CornerRadius="5" BorderThickness="3" Grid.Row="0" Grid.Column="0">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                        Width="325" Height="90" Name="tbŻywność" Background="#e6ffee">
+                        Width="325" Height="90" Name="tbŻywność" Background="#b3ffcc">
                     <TextBlock Text="Żywność" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Text="{Binding Path=żywnośćProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
 
-                    <TextBlock Text="{Binding Path=żywnośćProcent}" Height="30" Margin="10" />
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
                 </StackPanel>
             </Border>
             <Border BorderBrush="#b3ffcc" CornerRadius="5" BorderThickness="3" Grid.Row="0" Grid.Column="1">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbPrąd" Background="#b3ffcc">
                     <TextBlock Text="Prąd" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=prądProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#80ffaa" CornerRadius="5" BorderThickness="3" Grid.Row="0" Grid.Column="2">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbWoda" Background="#80ffaa">
                     <TextBlock Text="Woda" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=wodaProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#4dff88" CornerRadius="5" BorderThickness="3" Grid.Row="0" Grid.Column="3">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbSport" Background="#4dff88">
                     <TextBlock Text="Sport" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=sportProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#1aff66" CornerRadius="5" BorderThickness="3" Grid.Row="1" Grid.Column="0">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbRozrywka" Background="#1aff66">
                     <TextBlock Text="Rozrywka" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=rozrywkaProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#00e64d" CornerRadius="5" BorderThickness="3" Grid.Row="1" Grid.Column="1">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbUbranie" Background="#00e64d">
                     <TextBlock Text="Ubranie" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=ubranieProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#00b33c" CornerRadius="5" BorderThickness="3" Grid.Row="1" Grid.Column="2">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbMultimedia" Background="#00b33c">
                     <TextBlock Text="Multimedia" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=multimediaProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#00802b" CornerRadius="5" BorderThickness="3" Grid.Row="1" Grid.Column="3">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbDomoweZwierzaki" Background="#00802b">
                     <TextBlock Text="Domowe zwierzaki" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=domoweZwierzakiProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#004d1a" CornerRadius="5" BorderThickness="3" Grid.Row="2" Grid.Column="0">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbsrodkihigieniczne" Background="#004d1a">
                     <TextBlock Foreground="White" Text="Środki higieniczne" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Foreground="White" Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Foreground="White" Text="{Binding Path=środkihigieniczneProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    
                 </StackPanel>
             </Border>
             <Border BorderBrush="#003300" CornerRadius="5" BorderThickness="3" Grid.Row="2" Grid.Column="1">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbKosmetyki" Background="#003300">
                     <TextBlock Foreground="White" Text="Kosmetyki" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Foreground="White" Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Foreground="White" Text="{Binding Path=kosmetykiProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#26734d" CornerRadius="5" BorderThickness="3" Grid.Row="2" Grid.Column="2">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbNieprzewidzianeWydatki" Background="#26734d">
                     <TextBlock Foreground="White" Text="Nieprzewidziane wydatki" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Foreground="White" Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Foreground="White" Text="{Binding Path=nieprzewidzianeWydatkiProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#339966" CornerRadius="5" BorderThickness="3" Grid.Row="2" Grid.Column="3">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbKredyty" Background="#339966">
                     <TextBlock Text="Kredyty" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=kosmetykiProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#40bf80" CornerRadius="5" BorderThickness="3" Grid.Row="3" Grid.Column="0">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbWakacje" Background="#40bf80">
                     <TextBlock Text="Wakacje" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=wakacjeProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#66cc99" CornerRadius="5" BorderThickness="3" Grid.Row="3" Grid.Column="1">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbOszczędności" Background="#66cc99">
                     <TextBlock Text="Oszczędności" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=oszczędnościProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                   
                 </StackPanel>
             </Border>
             <Border BorderBrush="#8cd9b3" CornerRadius="5" BorderThickness="3" Grid.Row="3" Grid.Column="2">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbPaliwo" Background="#8cd9b3">
                     <TextBlock Text="Paliwo" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=paliwoProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                  
                 </StackPanel>
             </Border>
             <Border BorderBrush="#1affb2" CornerRadius="5" BorderThickness="3" Grid.Row="3" Grid.Column="3">
                 <StackPanel Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" 
                         Width="325" Height="90" Name="tbInne" Background="#1affb2">
                     <TextBlock Text="Inne" FontSize="18" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <TextBlock Text="Żywność" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
-                    <!-- <TextBlock Text="{Binding ElementName=cbKtegoria, Path=SelectedItem}" FontSize="30"></TextBlock>-->
+                    <TextBlock Text="{Binding Path=paliwoProcent}" FontSize="25" Margin="5,5,5,5" HorizontalAlignment="Center"></TextBlock>
+                    
                 </StackPanel>
             </Border>
         </Grid>
